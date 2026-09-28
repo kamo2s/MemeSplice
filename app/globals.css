@@ -18,3 +18,5 @@
 /* Supplied DNA wordmark; keep the header link accessible and responsive. */
 .header-wordmark{flex-shrink:0}.header-wordmark img{display:block;width:132px;height:auto}
 @media(max-width:480px){.header-wordmark img{width:110px}}
+
+.footer-wordmark img{display:block;width:132px;height:auto}
