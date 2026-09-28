@@ -22,6 +22,8 @@ import { popularCoins } from "@/lib/tokens/catalog";
 import { sameParent } from "@/lib/tokens/client";
 import type { Coin, Offspring } from "@/lib/memesplice/types";
 
+import { resourceContent } from "@/lib/resource-content";
+
 const navigation = [["home","Home"],["how-it-works","How It Works"],["create","Create"],["family-tree","Family Tree"],["explore","Explore"]];
 const filters = ["Newest","Most Remixed","Gen 2+"];
 const loadingMessages = ["Analyzing traits…","Splicing DNA…","Creating offspring…","Finalizing offspring…"];
@@ -38,13 +40,6 @@ const steps = [
   [Sparkles,"Make it yours","Explore the offspring’s traits, edit its draft, or Mutate Again."],
   [Rocket,"Launch it","Launch the selected child on Solana and register its lineage."],
 ] as const;
-const resources: Record<string, string> = {
-  Docs: "Splice begins with two parent coins. Choose an Instant Splice or request one custom offspring. Instant results are prepared in advance; custom generation creates one AI offspring through the shared queue, subject to availability.",
-  FAQ: "Is this real AI? Custom generation uses AI; Instant Splices and showcase examples are prepared. Can I launch a token? Solana launching and wallet connections are planned for a later phase. Does my result persist? Custom jobs and completed offspring are saved and resume after a refresh in the same browser session.",
-  Terms: "This is an interactive product prototype. No tokens are created, no transactions are processed, and demo market caps are illustrative. Full platform terms will be available before live services launch.",
-  Privacy: "Token queries use our data providers when not cached. Custom jobs use a signed session cookie and shared database; network identifiers are hashed for rate limits. No wallet is collected.",
-
-};
 export default function Home() {
   const wallet=useWallet();
   const [launchAfterWallet,setLaunchAfterWallet]=useState(false);
@@ -175,7 +170,7 @@ export default function Home() {
     <Dialog open={!!pendingParent} onOpenChange={open=>{if(!open)setPendingParent(null);}}><DialogContent className="lab-dialog"><DialogTitle>Choose a parent slot</DialogTitle><DialogDescription>Where should {pendingParent?.name} go? Your other parent stays in place.</DialogDescription>{pendingParent&&<><Artwork image={pendingParent.image} name={pendingParent.name} className="detail-artwork"/><div className="parent-target">{([0,1] as const).map(slot=><button key={slot} disabled={loading||sameParent(pendingParent,parents[slot===0?1:0])} onClick={()=>{changeParents(slot===0?[pendingParent,parents[1]]:[parents[0],pendingParent]);setPendingParent(null);}}>Parent {slot===0?"A":"B"}<span>{sameParent(pendingParent,parents[slot===0?1:0])?"Already in the other slot":`Replace ${parents[slot]?.ticker??"empty slot"}`}</span></button>)}</div></>}</DialogContent></Dialog>
     <WalletDialog open={modal==="wallet"} onClose={()=>setModal(null)} onConnected={()=>setModal(launchAfterWallet?"launch":null)}/>
     {chosen&&<LaunchDialog key={chosen.id} offspring={chosen} open={modal==="launch"} onClose={()=>setModal(null)} onConnect={()=>{setLaunchAfterWallet(true);setModal("wallet");}} onVerified={setOffspring}/>}
-    <Dialog open={!!modal&&modal!=="wallet"&&modal!=="launch"} onOpenChange={v=>{if(!v)setModal(null);}}><DialogContent className="lab-dialog"><div className="modal-symbol"><CircleHelp/></div><DialogTitle>{modal}</DialogTitle><DialogDescription>{resources[modal??""]}</DialogDescription><button className="btn btn-primary full-width" onClick={()=>setModal(null)}>Back to the lab <ArrowRight size={16}/></button></DialogContent></Dialog>
+    <Dialog open={!!modal&&modal!=="wallet"&&modal!=="launch"} onOpenChange={v=>{if(!v)setModal(null);}}><DialogContent className="lab-dialog resource-dialog"><div className="modal-symbol"><CircleHelp/></div><DialogTitle>{modal}</DialogTitle><DialogDescription>{resourceContent[modal??""]?.intro}</DialogDescription><div className="resource-sections">{resourceContent[modal??""]?.sections.map(section=><section key={section.title}><h3>{section.title}</h3><p>{section.text}</p></section>)}<section><h3>Useful links & contact</h3><div className="resource-links"><a href="https://x.com/SpliceMemes" target="_blank" rel="noopener noreferrer">Contact MemeSplice ↗</a><a href="https://pump.fun/docs/fees" target="_blank" rel="noopener noreferrer">Pump fees ↗</a><a href="https://pump.fun/docs/mayhem-mode-disclaimer" target="_blank" rel="noopener noreferrer">Pump Mayhem disclosure ↗</a></div></section></div><button className="btn btn-primary full-width" onClick={()=>setModal(null)}>Back to the lab <ArrowRight size={16}/></button></DialogContent></Dialog>
     <Dialog open={!!detail} onOpenChange={v=>{if(!v)setDetail(null);}}><DialogContent className="lab-dialog">{detail&&<><Artwork image={detail.image} name={detail.name} className="detail-artwork"/><div className="eyebrow">VERIFIED OFFSPRING · GEN {detail.generation}</div><DialogTitle>{detail.name} <span className="muted">${detail.ticker}</span></DialogTitle><DialogDescription>{detail.lore}</DialogDescription><div className="trait-tags">{detail.personalityTraits.map(t=><span key={t}>{t}</span>)}</div><div className="detail-parents"><span>Parents</span><b>{detail.parents.map(p=>p.name).join(" × ")}</b></div><div className="detail-parents"><span>Descendants</span><b>{detail.descendants}</b></div><div className="detail-parents"><span>Verified launch</span><b>{detail.launchedAt?new Date(detail.launchedAt).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):"Not launched"}</b></div>{detail.launch&&<a className="btn btn-secondary" href={`https://pump.fun/coin/${detail.launch.mint}`} target="_blank" rel="noopener noreferrer">View on Pump.fun <ArrowUpRight size={16}/></a>}<button className="btn btn-primary" onClick={()=>{changeParents(detail.parents);setDetail(null);scrollTo("create");}}>Try these parents <Dna size={17}/></button></>}</DialogContent></Dialog>
     {notice&&<div className="toast" role="status"><Check size={16}/>{notice}</div>}
   </>;
