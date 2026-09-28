@@ -1,0 +1,29 @@
+{
+  "mode": "built-in image_gen",
+  "assets": [
+    {
+      "path": "work/meme-artwork/characters-atlas.png",
+      "dimensions": [
+        1448,
+        1086
+      ],
+      "grid": [
+        4,
+        3
+      ],
+      "prompt": "Use case: stylized-concept\nAsset type: CSS sprite atlas for MemeSplice, a dark futuristic memecoin genetics lab website.\nPrimary request: Generate a single image precisely 1536 pixels wide by 1152 pixels tall, landscape aspect ratio 4:3. It is a perfectly aligned 4 columns by 3 rows atlas of exactly 12 square portrait tiles. All tiles have identical dark navy #090d1c background, zero gutters, zero borders, zero dividing lines, no typography or labels. Exact tile boundaries x=0,384,768,1152,1536; y=0,384,768,1152. Each character must be confined to its own 384x384 square, with face centered at that tile's center and bust/shoulders visible. Consistent scale and camera framing in every cell.\nSubjects, exact row-major order: row 1: friendly golden Shiba Inu dog; orange Shiba Inu dog; small brown dog wearing a pink knitted hat; green Pepe-style expressive meme frog wearing a blue hoodie. Row 2: red/orange confident Shiba Inu dog; open-mouth white and tan cat; cute mischievous black cloud spirit; small horned white goat. Row 3: cute baby hippo; cute blue and white penguin; relaxed brown dog in gray sweater; orange cat wearing mirrored sunglasses.\nStyle/medium: premium playful polished 3D collectible character render, detailed tactile surfaces, appealing expressive eyes, subtle violet rim lighting, coherent visual style.\nComposition/framing: Each of the twelve tile portraits is independently centered, shoulders and bust framed. Leave comfortable margin around heads/ears; no character overlaps into a neighboring square.\nConstraints: Exactly four evenly sized columns and three evenly sized rows, no skipped or repeated tile, no text, no lettering, no numbers, no logos, no watermark, no grid strokes, no border or gutters."
+    },
+    {
+      "path": "work/meme-artwork/offspring-atlas.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "grid": [
+        3,
+        1
+      ],
+      "prompt": "Use case: stylized-concept\nAsset type: CSS sprite atlas for MemeSplice, a dark futuristic memecoin genetics lab website.\nPrimary request: Generate a single image precisely 1536 pixels wide by 512 pixels tall, wide landscape aspect ratio 3:1. It is a perfectly aligned triptych atlas with 3 columns and 1 row of three distinct square offspring character portraits. Zero gutters, zero borders, zero dividing lines. Exact tile boundaries x=0,512,1024,1536. Dark navy #090d1c background throughout all three square cells.\nSubjects, exact left-to-right order: Left tile: adventurous golden Shiba astronaut in a dark silver space suit and helmet, cyan highlights. Center tile: charismatic golden Shiba/frog hybrid wearing emerald mirrored sunglasses and purple hoodie, rounded frog cheeks and Shiba ears, confident demeanor. Right tile: calm green-eyed silver/green Shiba-frog hybrid with pointed ears and subtly green skin, wearing a black scientific jacket with teal accents.\nStyle/medium: premium playful polished 3D collectible character renders, appealing proportions, detailed tactile surfaces, vivid violet and cyan rim lighting, coherent visual style.\nComposition/framing: Each character waist-up and independently centered within its own square. Maintain at least 10% space around faces, consistent scale and camera framing. Confine each character entirely within its square tile.\nConstraints: Exactly three equal square tiles side by side, no extra characters, no typography, no labels, no lettering, no text, no logos, no watermark, no dividing strokes, no borders or gutters."
+    }
+  ]
+}

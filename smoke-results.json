@@ -1,0 +1,383 @@
+[
+  {
+    "id": "d7617642-ece4-44c1-a839-ef6e6c53d392",
+    "status": "COMPLETE",
+    "result": {
+      "id": "d7617642-ece4-44c1-a839-ef6e6c53d392",
+      "lore": "KnitBonk blends sharp skepticism with laid-back coziness, rocking its iconic red exclamation marks alongside a snug pink knitted hat. This dog’s got the alertness of Bonk and the heartwarming vibe of WIF, ready to keep you both on your toes and in your feels.",
+      "name": "KnitBonk",
+      "image": {
+        "url": "https://qvitpuikrisqmgsrhubh.supabase.co/storage/v1/object/public/offspring/custom/d7617642-ece4-44c1-a839-ef6e6c53d392/offspring.webp",
+        "atlas": "offspring",
+        "index": 0
+      },
+      "source": "custom",
+      "status": "draft",
+      "ticker": "KNITB",
+      "parents": [
+        {
+          "id": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+          "name": "Bonk",
+          "image": {
+            "url": "/images/tokens/bonk.jpg",
+            "urls": [
+              "/images/tokens/bonk.jpg",
+              "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FhQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I&sig=bf2e7f55650e4cbae7c361d3a5fcfd91f749c17314620c25aaef391d5bd4533f"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "Bonk",
+            "ticker": "Bonk",
+            "decimals": 5,
+            "imageUrl": "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+            "priceUsd": 0.0000037312082,
+            "metadataUri": "https://arweave.net/QPC6FYdUn-3V8ytFNuoCS85S2tHAuiDblh6u3CIZLsw",
+            "mintAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+            "imageSources": [
+              {
+                "url": "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+                "source": "helius",
+                "displayUrl": "/images/tokens/bonk.jpg"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FhQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I&sig=bf2e7f55650e4cbae7c361d3a5fcfd91f749c17314620c25aaef391d5bd4533f"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "Bonk",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+        },
+        {
+          "id": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+          "name": "dogwifhat",
+          "image": {
+            "url": "/api/tokens/image?src=https%3A%2F%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link%2F&sig=ba74127e7de7f88ec56e72dd207f2c0618855626daebc2a73924fed008660954",
+            "urls": [
+              "/api/tokens/image?src=https%3A%2F%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link%2F&sig=ba74127e7de7f88ec56e72dd207f2c0618855626daebc2a73924fed008660954",
+              "/api/tokens/image?src=https%3A%2F%2Fipfs.io%2Fipfs%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum&sig=4c0201891721d105656948deed9ba8d6f8da9c5456be84825310d43c9f07c854",
+              "/api/tokens/image?src=https%3A%2F%2Fdweb.link%2Fipfs%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum&sig=9fad0ba569eda28559e6ec97f36f2d8409a425a53ff97fc3112f3baa223adc7c",
+              "/images/tokens/wif.jpg"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "dogwifhat",
+            "ticker": "WIF",
+            "decimals": 6,
+            "imageUrl": "https://bafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link/",
+            "priceUsd": 0.24642992,
+            "metadataUri": "https://bafkreihwqhounu3cdwgvk2gc2dqcinpntlccbo3xcy4xuerd24yndldl5q.ipfs.nftstorage.link/",
+            "mintAddress": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+            "imageSources": [
+              {
+                "url": "https://bafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link/",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link%2F&sig=ba74127e7de7f88ec56e72dd207f2c0618855626daebc2a73924fed008660954"
+              },
+              {
+                "url": "https://ipfs.io/ipfs/bafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fipfs.io%2Fipfs%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum&sig=4c0201891721d105656948deed9ba8d6f8da9c5456be84825310d43c9f07c854"
+              },
+              {
+                "url": "https://dweb.link/ipfs/bafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fdweb.link%2Fipfs%2Fbafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum&sig=9fad0ba569eda28559e6ec97f36f2d8409a425a53ff97fc3112f3baa223adc7c"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://bafkreibk3covs5ltyqxa272uodhculbr6kea6betidfwy3ajsav2vjzyum.ipfs.nftstorage.link",
+                "source": "helius",
+                "displayUrl": "/images/tokens/wif.jpg"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "WIF",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm"
+        }
+      ],
+      "tagline": "Where Skepticism Meets Cozy Charm.",
+      "createdAt": "2026-09-27T21:05:04.158Z",
+      "generation": 1,
+      "launchedAt": null,
+      "descendants": 0,
+      "recommended": false,
+      "interpretation": "balanced",
+      "generationJobId": "d7617642-ece4-44c1-a839-ef6e6c53d392",
+      "inheritedTraits": [
+        "three red exclamation marks above head, white muzzle and eye markings, skeptical unimpressed expression, orange, white, black, red, yellow color palette, stylized canine face",
+        "pink knitted hat with knit texture, brown eyes, calm neutral personality, tan and pink color accents, photographic realism influences in texture detailing"
+      ],
+      "parentAInfluence": 45,
+      "parentBInfluence": 35,
+      "mutationInfluence": 20,
+      "personalityTraits": [
+        "skeptical expression",
+        "three red exclamation marks above head",
+        "pink knitted hat accessory",
+        "white muzzle and eye markings",
+        "stylized 3D cartoon art style"
+      ]
+    }
+  },
+  {
+    "id": "618c4985-ba7a-43bf-8290-6c8e84360c76",
+    "status": "COMPLETE",
+    "result": {
+      "id": "618c4985-ba7a-43bf-8290-6c8e84360c76",
+      "lore": "Popfart is a cheeky new memecoin born from a cat's explosive surprise and a mischievous gas cloud's playful grin. Sporting the iconic giant open mouth with a mischievous grin made of pixelated gas swirls, Popfart lives to shock and amuse with every digital breath. It’s the whimsical intersection of cute shock and absurd flatulence humor — impossible to ignore and impossible not to giggle at.",
+      "name": "Popfart",
+      "image": {
+        "url": "https://qvitpuikrisqmgsrhubh.supabase.co/storage/v1/object/public/offspring/custom/618c4985-ba7a-43bf-8290-6c8e84360c76/offspring.webp",
+        "atlas": "offspring",
+        "index": 0
+      },
+      "source": "custom",
+      "status": "draft",
+      "ticker": "PFART",
+      "parents": [
+        {
+          "id": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+          "name": "POPCAT",
+          "image": {
+            "url": "/images/tokens/popcat.jpg",
+            "urls": [
+              "/images/tokens/popcat.jpg",
+              "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FA1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI&sig=8b1fdfb649862ccb57692b06b9524b940bad8c46b3480947b3f2d00703e2d689"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "POPCAT",
+            "ticker": "POPCAT",
+            "decimals": 9,
+            "imageUrl": "https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+            "priceUsd": 0.0557996,
+            "metadataUri": "https://arweave.net/IiX6OFxiM1wb8DOSidDSn_6KVHqCpwnshUzU8RU5EN8",
+            "mintAddress": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+            "imageSources": [
+              {
+                "url": "https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+                "source": "helius",
+                "displayUrl": "/images/tokens/popcat.jpg"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FA1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI&sig=8b1fdfb649862ccb57692b06b9524b940bad8c46b3480947b3f2d00703e2d689"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "POPCAT",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr"
+        },
+        {
+          "id": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+          "name": "Fartcoin",
+          "image": {
+            "url": "/api/tokens/image?src=https%3A%2F%2Fipfs.io%2Fipfs%2FQmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g&sig=b01b397967c67efc017e2e1786b33cb2b8d29559bd15526af0e142060959c1c8",
+            "urls": [
+              "/api/tokens/image?src=https%3A%2F%2Fipfs.io%2Fipfs%2FQmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g&sig=b01b397967c67efc017e2e1786b33cb2b8d29559bd15526af0e142060959c1c8",
+              "/api/tokens/image?src=https%3A%2F%2Fdweb.link%2Fipfs%2FQmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g&sig=b1224accf66d90062c20e47bb4eb8a7d02b4413478539d0f60cbccb780102b0f",
+              "/images/tokens/fartcoin.png"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "Fartcoin",
+            "ticker": "Fartcoin",
+            "decimals": 6,
+            "imageUrl": "https://ipfs.io/ipfs/QmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g",
+            "priceUsd": 0.19701235,
+            "metadataUri": "https://ipfs.io/ipfs/QmYfe8zVGHA1heej47AkBX3Nnetg2h2kqj5yymz1xyKeHb",
+            "mintAddress": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+            "imageSources": [
+              {
+                "url": "https://ipfs.io/ipfs/QmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fipfs.io%2Fipfs%2FQmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g&sig=b01b397967c67efc017e2e1786b33cb2b8d29559bd15526af0e142060959c1c8"
+              },
+              {
+                "url": "https://dweb.link/ipfs/QmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fdweb.link%2Fipfs%2FQmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g&sig=b1224accf66d90062c20e47bb4eb8a7d02b4413478539d0f60cbccb780102b0f"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://ipfs.io/ipfs/QmQr3Fz4h1etNsF7oLGMRHiCzhB5y9a7GjyodnF7zLHK1g",
+                "source": "helius",
+                "displayUrl": "/images/tokens/fartcoin.png"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "Fartcoin",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump"
+        }
+      ],
+      "tagline": "Big Mouth Energy Meets Mischief Gas",
+      "createdAt": "2026-09-27T21:05:20.990Z",
+      "generation": 1,
+      "launchedAt": null,
+      "descendants": 0,
+      "recommended": false,
+      "interpretation": "parent-a",
+      "generationJobId": "618c4985-ba7a-43bf-8290-6c8e84360c76",
+      "inheritedTraits": [
+        "large open mouth taking most of face, simple shading, pinkish upward tilted ears, curious surprised expression",
+        "pixelated pixel art style, mischievous grin, black and white color accents, playful silly personality"
+      ],
+      "parentAInfluence": 50,
+      "parentBInfluence": 30,
+      "mutationInfluence": 20,
+      "personalityTraits": [
+        "large open mouth from Popcat",
+        "pixelated gas swirl grin from Fartcoin",
+        "pinkish upward-tilted ears",
+        "playful mischievous expression",
+        "blend of minimalist digital and pixel art styles"
+      ]
+    }
+  },
+  {
+    "id": "67d7bcf5-d1f8-491c-8842-26c308d599b8",
+    "status": "COMPLETE",
+    "result": {
+      "id": "67d7bcf5-d1f8-491c-8842-26c308d599b8",
+      "lore": "PopBonk is the fusion where the skeptical dog meets the surprised cat. Sporting the iconic three red exclamation marks above a wide, exaggerated open mouth, PopBonk captures both alert curiosity and shock in a vibrant new meme expression. This face says it all: 'Did that just happen or not?'.",
+      "name": "PopBonk",
+      "image": {
+        "url": "https://qvitpuikrisqmgsrhubh.supabase.co/storage/v1/object/public/offspring/custom/67d7bcf5-d1f8-491c-8842-26c308d599b8/offspring.webp",
+        "atlas": "offspring",
+        "index": 0
+      },
+      "source": "custom",
+      "status": "draft",
+      "ticker": "PBONK",
+      "parents": [
+        {
+          "id": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+          "name": "Bonk",
+          "image": {
+            "url": "/images/tokens/bonk.jpg",
+            "urls": [
+              "/images/tokens/bonk.jpg",
+              "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FhQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I&sig=bf2e7f55650e4cbae7c361d3a5fcfd91f749c17314620c25aaef391d5bd4533f"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "Bonk",
+            "ticker": "Bonk",
+            "decimals": 5,
+            "imageUrl": "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+            "priceUsd": 0.0000037312082,
+            "metadataUri": "https://arweave.net/QPC6FYdUn-3V8ytFNuoCS85S2tHAuiDblh6u3CIZLsw",
+            "mintAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+            "imageSources": [
+              {
+                "url": "https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+                "source": "helius",
+                "displayUrl": "/images/tokens/bonk.jpg"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://arweave.net/hQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FhQiPZOsRZXGXBJd_82PhVdlM_hACsT_q6wqwf5cSY7I&sig=bf2e7f55650e4cbae7c361d3a5fcfd91f749c17314620c25aaef391d5bd4533f"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "Bonk",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"
+        },
+        {
+          "id": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+          "name": "POPCAT",
+          "image": {
+            "url": "/images/tokens/popcat.jpg",
+            "urls": [
+              "/images/tokens/popcat.jpg",
+              "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FA1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI&sig=8b1fdfb649862ccb57692b06b9524b940bad8c46b3480947b3f2d00703e2d689"
+            ],
+            "atlas": "parents",
+            "index": 0
+          },
+          "token": {
+            "name": "POPCAT",
+            "ticker": "POPCAT",
+            "decimals": 9,
+            "imageUrl": "https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+            "priceUsd": 0.0557996,
+            "metadataUri": "https://arweave.net/IiX6OFxiM1wb8DOSidDSn_6KVHqCpwnshUzU8RU5EN8",
+            "mintAddress": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+            "imageSources": [
+              {
+                "url": "https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+                "source": "helius",
+                "displayUrl": "/images/tokens/popcat.jpg"
+              },
+              {
+                "url": "https://cdn.helius-rpc.com/cdn-cgi/image//https://arweave.net/A1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI",
+                "source": "helius",
+                "displayUrl": "/api/tokens/image?src=https%3A%2F%2Fcdn.helius-rpc.com%2Fcdn-cgi%2Fimage%2F%2Fhttps%3A%2F%2Farweave.net%2FA1etRNMKxhlNGTf-gNBtJ75QJJ4NJtbKh_UXQTlLXzI&sig=8b1fdfb649862ccb57692b06b9524b940bad8c46b3480947b3f2d00703e2d689"
+              }
+            ],
+            "marketCapUsd": null
+          },
+          "trait": "meme energy",
+          "ticker": "POPCAT",
+          "marketCap": "",
+          "generation": 0,
+          "contractAddress": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr"
+        }
+      ],
+      "tagline": "When surprise meets skepticism in one epic face!",
+      "createdAt": "2026-09-27T21:05:46.933Z",
+      "generation": 1,
+      "launchedAt": null,
+      "descendants": 0,
+      "recommended": false,
+      "interpretation": "balanced",
+      "generationJobId": "67d7bcf5-d1f8-491c-8842-26c308d599b8",
+      "inheritedTraits": [
+        "three red exclamation marks above head, white muzzle and eye markings, skeptical expression, shadow cast on yellow circular background, 3D cartoon art style",
+        "large open mouth, pinkish ears, surprised expression, minimalist digital art influence, cat head shape"
+      ],
+      "parentAInfluence": 45,
+      "parentBInfluence": 40,
+      "mutationInfluence": 15,
+      "personalityTraits": [
+        "three red exclamation marks floating above head",
+        "dog's white muzzle and skeptical eyes",
+        "cat's large wide-open mouth",
+        "pinkish cat ears",
+        "vibrant yellow circular background"
+      ]
+    }
+  }
+]

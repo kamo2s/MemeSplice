@@ -1,0 +1,116 @@
+[
+  {
+    "a": "BONK",
+    "b": "WIF",
+    "category": "Popular",
+    "name": "Bonkwif",
+    "ticker": "BNKWIF",
+    "image": "/images/showcase/bonkwif.webp",
+    "tagline": "Skeptical warmth, woven in fur.",
+    "lore": "BONK’s orange Shiba face and raised brows peek out beneath WIF’s unmistakable pink knitted hat. Equal parts side-eye and soft yarn, Bonkwif keeps the pack cozy and the jokes dry.",
+    "traits": [
+      "Skeptical",
+      "Cozy",
+      "Loyal"
+    ],
+    "inherited": [
+      "orange Shiba face, cream muzzle and skeptical brows",
+      "signature pale pink knitted beanie"
+    ]
+  },
+  {
+    "a": "POPCAT",
+    "b": "FARTCOIN",
+    "category": "Chaotic",
+    "name": "GasKitty",
+    "ticker": "GASKITTY",
+    "image": "/images/showcase/gaskitty.webp",
+    "tagline": "Where surprise meets cheeky breeze!",
+    "lore": "POPCAT’s wide-open mouth becomes the source of Fartcoin-inspired pixel puffs. GasKitty turns every surprised gasp into a mischievous little gust.",
+    "traits": [
+      "Surprised",
+      "Cheeky",
+      "Unfiltered"
+    ],
+    "inherited": [
+      "wide O-shaped mouth and white-and-brown cat face",
+      "pixel-art styling and comic gas-cloud motif"
+    ]
+  },
+  {
+    "a": "BONK",
+    "b": "POPCAT",
+    "category": "Playful",
+    "name": "Boncata",
+    "ticker": "BONCAT",
+    "image": "/images/showcase/boncata.webp",
+    "tagline": "When skepticism meets surprise!",
+    "lore": "BONK’s orange coat, cream muzzle and skeptical brows meet POPCAT’s enormous open mouth. Boncata looks unimpressed until one spectacular gasp gives the game away.",
+    "traits": [
+      "Expressive",
+      "Skeptical",
+      "Playful"
+    ],
+    "inherited": [
+      "orange Shiba coloring, cream muzzle and raised brows",
+      "cat ears and signature round open mouth"
+    ]
+  },
+  {
+    "a": "MEW",
+    "b": "WIF",
+    "category": "Cozy",
+    "name": "Purl",
+    "ticker": "PURL",
+    "image": "/images/instant/purl.webp",
+    "tagline": "A knowing look. A perfectly knitted disguise.",
+    "lore": "MEW’s white coat and narrow mischievous eyes meet WIF’s snug pink knitted beanie. Purl is the quiet observer of the lab, saving a sharp little joke for just the right moment.",
+    "traits": [
+      "Observant",
+      "Mischievous",
+      "Cozy"
+    ],
+    "inherited": [
+      "white cat silhouette, pink ears and narrow eyes",
+      "recognizable pale pink ribbed knitted beanie"
+    ]
+  },
+  {
+    "a": "BONK",
+    "b": "PNUT",
+    "category": "Woodland",
+    "name": "Acorn",
+    "ticker": "ACORN",
+    "image": "/images/instant/acorn.webp",
+    "tagline": "Underdog heart. Squirrel-sized ambition.",
+    "lore": "BONK’s orange Shiba face and cream muzzle join Peanut’s bushy squirrel tail and peanut-holding paws. Acorn stashes tiny treasures and big plans for the entire pack.",
+    "traits": [
+      "Resourceful",
+      "Loyal",
+      "Curious"
+    ],
+    "inherited": [
+      "orange Shiba face, triangular ears and cream muzzle",
+      "fluffy curled squirrel tail and peanut-holding paws"
+    ]
+  },
+  {
+    "a": "POPCAT",
+    "b": "MOODENG",
+    "category": "Surprised",
+    "name": "Gulp",
+    "ticker": "GULP",
+    "image": "/images/instant/gulp.webp",
+    "tagline": "The tiniest hippo. The biggest reaction.",
+    "lore": "POPCAT’s unmistakable O-shaped mouth and pointed cat ears meet Moo Deng’s round hippo snout, glossy gray skin and pink cheeks. Gulp makes every small surprise feel enormous.",
+    "traits": [
+      "Expressive",
+      "Bouncy",
+      "Curious"
+    ],
+    "inherited": [
+      "enormous round open mouth and pointed cat ears",
+      "baby pygmy hippo snout, wet gray skin and pink cheeks"
+    ]
+  }
+]

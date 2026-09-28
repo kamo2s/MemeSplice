@@ -1,0 +1,95 @@
+[
+  {
+    "id": "gaskitty",
+    "prepared": true,
+    "parentTickers": [
+      "POPCAT",
+      "FARTCOIN"
+    ],
+    "offspring": {
+      "name": "GasKitty",
+      "ticker": "GASKITTY",
+      "tagline": "Where surprise meets cheeky breeze!",
+      "image": "/images/showcase/gaskitty.webp"
+    },
+    "provenance": {
+      "generationJobId": "5de86656-e3c5-4c4e-97af-b06c3ee4d3d5",
+      "conceptPromptVersion": "offspring-concept-v1",
+      "imagePromptVersion": "offspring-image-v1"
+    }
+  },
+  {
+    "id": "boncata",
+    "prepared": true,
+    "parentTickers": [
+      "BONK",
+      "POPCAT"
+    ],
+    "offspring": {
+      "name": "Boncata",
+      "ticker": "BONCAT",
+      "tagline": "When skepticism meets surprise!",
+      "image": "/images/showcase/boncata.webp"
+    },
+    "provenance": {
+      "generationJobId": "b078cede-eb7f-4c75-bd34-0af4c05f4a99",
+      "conceptPromptVersion": "offspring-concept-v1",
+      "imagePromptVersion": "offspring-image-v1"
+    }
+  },
+  {
+    "id": "bonkwif",
+    "prepared": true,
+    "parentTickers": [
+      "BONK",
+      "WIF"
+    ],
+    "offspring": {
+      "name": "Bonkwif",
+      "ticker": "BNKWIF",
+      "tagline": "Skeptical warmth, woven in fur.",
+      "image": "/images/showcase/bonkwif.webp"
+    },
+    "provenance": {
+      "generationJobId": "f1d7e8f2-f533-4af4-8abf-fbdcd64e860e",
+      "conceptPromptVersion": "offspring-concept-v2",
+      "imagePromptVersion": "offspring-image-v2"
+    }
+  },
+  {
+    "id": "purl",
+    "prepared": true,
+    "parentTickers": [
+      "MEW",
+      "WIF"
+    ],
+    "offspring": {
+      "name": "Purl",
+      "ticker": "PURL",
+      "tagline": "A knowing look. A perfectly knitted disguise.",
+      "image": "/images/instant/purl.webp"
+    },
+    "provenance": {
+      "source": "editorial-imagegen",
+      "promptFile": "/images/instant/prompts.json"
+    }
+  },
+  {
+    "id": "gulp",
+    "prepared": true,
+    "parentTickers": [
+      "POPCAT",
+      "MOODENG"
+    ],
+    "offspring": {
+      "name": "Gulp",
+      "ticker": "GULP",
+      "tagline": "The tiniest hippo. The biggest reaction.",
+      "image": "/images/instant/gulp.webp"
+    },
+    "provenance": {
+      "source": "editorial-imagegen",
+      "promptFile": "/images/instant/prompts.json"
+    }
+  }
+]
