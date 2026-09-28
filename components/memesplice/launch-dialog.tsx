@@ -56,8 +56,14 @@ export function LaunchDialog({offspring,open,onClose,onConnect,onVerified,apiPat
    if(!p.rehearsal){const latest=await refresh();if(!latest.enabled||latest.launch?.id!==p.id||latest.launch?.status!=='AWAITING_SIGNATURE')throw Error('Launch state changed. Check the existing attempt before continuing.');}
    if(!p.signed){
     setProgress(p.rehearsal?'Open Phantom and review the sign-only rehearsal. No broadcast will follow.':'Review and approve the transaction in your wallet…');
+    // Bind the mint signature to the exact reviewed message before wallet
+    // handoff. Rehearsals deliberately never receive this signature.
+    if(!p.rehearsal&&p.mint){signMint(p.tx,p.mint);p.mint.secretKey.fill(0);p.mint=null;}
     const message=transactionMessage(p.tx);let signed:LaunchTransaction;
-    try{signed=await wallet.signTransaction(p.tx);}catch{throw Error('Wallet approval cancelled. You can retry, or edit your settings.');}
+    // Some providers mutate their input. Preserve the reviewed transaction
+    // for retries instead of allowing that mutation to become a new baseline.
+    const walletCopy=decodeTransaction(transactionWire(p.tx).toString('base64'));
+    try{signed=await wallet.signTransaction(walletCopy);}catch{throw Error('Wallet approval cancelled. You can retry, or edit your settings.');}
     if(!transactionMessage(signed).equals(message))throw Error('The wallet changed the reviewed transaction message. No transaction was submitted.');
     if(!verifyWalletSignature(signed,p.wallet))throw Error('The returned wallet signature could not be verified. No transaction was submitted.');
     if(currentWallet.current!==p.wallet)throw Error('The connected wallet changed. Reconnect the wallet used for this review.');
@@ -66,8 +72,8 @@ export function LaunchDialog({offspring,open,onClose,onConnect,onVerified,apiPat
      if(verifyAllSignatures(signed))throw Error('Unexpected complete rehearsal signature.');
      signing.current=null;setPrepared(null);setProgress('Wallet signature verified locally. No mint signature, no broadcast, no token created.');return;
     }
-    if(!p.mint)throw Error('Mint signer expired. Wait for this attempt to safely expire.');
-    signMint(signed,p.mint);p.mint.secretKey.fill(0);p.mint=null;p.tx=signed;p.signed=true;
+    if(!verifyAllSignatures(signed))throw Error('The wallet did not preserve the required mint signature. No transaction was submitted.');
+    p.tx=signed;p.signed=true;
    }
    setProgress('Submitting and checking your launch…');
    const result=await api<{launch:Launch}>({action:'submit',launchId:p.id,transaction:transactionWire(p.tx).toString('base64')},apiPath);

@@ -82,7 +82,7 @@ test('launch review retains the latest failed attempt after refresh without prep
  const db=require(join(process.env.SPLICE_PUMP_BUILD,'lib/server/supabase.js')),config=load('config'),server=load('server');
  const saved={database:db.database,connection:config.launchConnection,config:config.launchConfig};
  const failure={id:'failed',status:'FAILED',error_code:'EXPIRED'};const reads=[];
- db.database=async(route,init={})=>{assert.equal(init.method,undefined);reads.push(route);if(route.startsWith('offspring?'))return [{id:'child',generation_job_id:'job',result:{name:'Child'}}];if(route.startsWith('generation_jobs?'))return [{id:'job'}];if(route.includes('status=eq.FAILED'))return [failure];return [];};
+ db.database=async(route,init={})=>{assert.equal(init.method,undefined);reads.push(route);if(route.startsWith('offspring?'))return [{id:'child',generation_job_id:'job',result:{name:'Child',image:{atlas:'offspring',index:0},parents:[{image:{atlas:'parents',index:0}},{image:{atlas:'parents',index:1}}]}}];if(route.startsWith('generation_jobs?'))return [{id:'job'}];if(route.includes('status=eq.FAILED'))return [failure];return [];};
  config.launchConfig=()=>({enabled:true,network:'mainnet-beta'});config.launchConnection=()=>{throw Error('offline');};
  try{const first=await server.reviewLaunch('owner','child'),second=await server.reviewLaunch('owner','child');assert.equal(first.launch.status,'FAILED');assert.equal(second.launch.errorCode,'EXPIRED');assert.ok(reads.some(r=>r.includes('status=eq.FAILED&order=created_at.desc&limit=1')));}finally{db.database=saved.database;config.launchConfig=saved.config;config.launchConnection=saved.connection;}
 });
