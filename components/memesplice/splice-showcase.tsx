@@ -8,9 +8,9 @@ import {LabBackdrop} from './lab-backdrop';
 import styles from './splice-showcase.module.css';
 
 export function SpliceShowcase({onTry,onMakeOwn,disabled=false}:{onTry:(parents:[Coin,Coin])=>void;onMakeOwn:()=>void;disabled?:boolean}){
-  const rotation=useShowcaseRotation(showcaseItems.length),touch=useRef<{x:number;y:number}|null>(null);
+  const root=useRef<HTMLElement|null>(null),rotation=useShowcaseRotation(showcaseItems.length,root),touch=useRef<{x:number;y:number}|null>(null);
   const item=showcaseItems[rotation.index];
-  return <section id="splice-showcase" ref={rotation.root} className={`${styles.section} container lab-scene`} aria-labelledby="showcase-title" aria-roledescription="carousel"
+  return <section id="splice-showcase" ref={root} className={`${styles.section} container lab-scene`} aria-labelledby="showcase-title" aria-roledescription="carousel"
     onPointerEnter={event=>{if(event.pointerType==='mouse')rotation.setHovered(true);}} onPointerLeave={event=>{if(event.pointerType==='mouse')rotation.setHovered(false);}}
     onFocusCapture={()=>rotation.setFocused(true)} onBlurCapture={event=>{if(!event.currentTarget.contains(event.relatedTarget as Node|null))rotation.setFocused(false);}}>
     <LabBackdrop scene="showcase"/>

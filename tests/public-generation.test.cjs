@@ -4,7 +4,7 @@ class BackendError extends Error{constructor(code,message,status=503){super(mess
 test('public error messages separate user capacity and provider/worker cooldown without internals',async()=>{
  const codes=['USER_LIMIT','CAPACITY','PROVIDER_PAUSED','WORKER_UNAVAILABLE'];
  for(const code of codes){
-  const m=load('lib/generation/server.ts',{'server-only':{},'../server/supabase':{BackendError,database:async()=>[{enabled:true}],rpc:async()=>({error:code})},'../tokens/server':{verifyToken:async()=>({})},'../tokens/client':{tokenToCoin:x=>x},'../ai/generation-provider':{realGenerationProvider:{available:true}},'./instant-splices':{instantPairs:[]}});
+  const m=load('lib/generation/server.ts',{'server-only':{},'../server/supabase':{BackendError,database:async()=>[{enabled:true}],rpc:async()=>({error:code})},'../tokens/server':{verifyToken:async()=>({})},'../tokens/server/token-images':{refreshStoredOffspring:x=>x},'../tokens/client':{tokenToCoin:x=>x},'../ai/generation-provider':{realGenerationProvider:{available:true}},'./instant-splices':{instantPairs:[]}});
   await assert.rejects(m.enqueueGeneration('session','ip','request','a','b'),e=>e.status===429&&e.message===(code==='USER_LIMIT'?"You've reached your mutation limit for now. Try again later.":code==='CAPACITY'?'The mutation lab is at capacity. Try an Instant Splice or check back later.':'The mutation lab is temporarily cooling down. Your options are still safe.'));
  }
 });

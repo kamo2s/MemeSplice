@@ -8,7 +8,7 @@ export function useGenerationJob(onComplete:(offspring:Offspring)=>void){
   const [connection,setConnection]=useState("");
   const source=useRef<EventSource|null>(null),callback=useRef(onComplete),requestId=useRef<string|null>(null);
   const busy=useRef(false);
-  callback.current=onComplete;
+  useEffect(()=>{callback.current=onComplete;},[onComplete]);
   function follow(id:string){
     source.current?.close();sessionStorage.setItem("splice-active-job",id);
     const events=new EventSource(`/api/generation/jobs/${id}/events`);source.current=events;

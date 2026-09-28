@@ -24,6 +24,7 @@ function mount({reduced=false}={}){
  global.setTimeout=(fn,ms)=>{timers.set(++nextTimer,{fn,ms});return nextTimer;};global.clearTimeout=id=>timers.delete(id);
  global.fetch=(...args)=>{requests.push(args);throw Error('Showcase must never call an API');};
  const react={
+  useSyncExternalStore(subscribe,snapshot){const [value,setValue]=react.useState(snapshot);react.useEffect(()=>subscribe(()=>setValue(snapshot())),[subscribe]);return value;},
   useState(initial){const i=cursor++;if(!slots[i])slots[i]={value:typeof initial==='function'?initial():initial};return [slots[i].value,value=>{const next=typeof value==='function'?value(slots[i].value):value;if(!Object.is(next,slots[i].value)){slots[i].value=next;dirty=true;}}];},
   useRef(value){const i=cursor++;return (slots[i]??={current:value});},
   useEffect(fn,deps){const i=cursor++,old=slots[i];if(!old||!deps||deps.some((v,n)=>!Object.is(v,old.deps[n])))pending.push(()=>{old?.cleanup?.();slots[i]={deps,cleanup:fn()};});}

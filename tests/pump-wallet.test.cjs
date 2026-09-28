@@ -2,10 +2,10 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),Module=require('node:module'),{EventEmitter}=require('node:events');
 const {Keypair,Transaction,SystemProgram}=require('@solana/web3.js');
 test('Phantom and Solflare adapters: explicit connect/sign, reject, account switch, disconnect; no broadcast',async()=>{
- const saved={window:global.window,document:global.document,load:Module._load};let current;
+ const saved={window:global.window,document:global.document,load:Module._load};
  class Provider extends EventEmitter{
-  constructor(){super();this.publicKey=Keypair.generate().publicKey;this.isPhantom=true;this.isSolflare=true;this.isConnected=false;this.connected=false;this.calls={connect:0,sign:0,disconnect:0};current=this;}
-  async connect(){this.calls.connect++;if(this.rejectConnect)throw Error('Rejected');this.isConnected=this.connected=true;}
+  constructor(){super();Provider.latest=this;this.publicKey=Keypair.generate().publicKey;this.isPhantom=true;this.isSolflare=true;this.isConnected=false;this.connected=false;this.calls={connect:0,sign:0,disconnect:0};}
+  async connect(){Provider.latest=this;this.calls.connect++;if(this.rejectConnect)throw Error('Rejected');this.isConnected=this.connected=true;}
   async disconnect(){this.calls.disconnect++;this.isConnected=this.connected=false;}
   async signTransaction(tx){this.calls.sign++;if(this.rejectSign)throw Error('Rejected');return tx;}
   async sendTransaction(){throw Error('Broadcast forbidden');}
@@ -18,7 +18,7 @@ test('Phantom and Solflare adapters: explicit connect/sign, reject, account swit
   for(const Adapter of [PhantomWalletAdapter,SolflareWalletAdapter]){
    const phantom=new Provider();global.window.phantom={solana:phantom};global.window.solflare=phantom;
    const adapter=new Adapter({network:'devnet'});adapter.on('error',()=>{});assert.equal(adapter.connected,false);assert.equal(phantom.calls.connect,0);
-   await adapter.connect();const provider=current;assert.equal(adapter.connected,true);assert.ok(adapter.publicKey.equals(provider.publicKey));assert.equal(provider.calls.connect,1);assert.equal(provider.calls.sign,0);
+   await adapter.connect();const provider=Provider.latest;assert.equal(adapter.connected,true);assert.ok(adapter.publicKey.equals(provider.publicKey));assert.equal(provider.calls.connect,1);assert.equal(provider.calls.sign,0);
    const tx=new Transaction({feePayer:provider.publicKey,recentBlockhash:Keypair.generate().publicKey.toBase58()}).add(SystemProgram.transfer({fromPubkey:provider.publicKey,toPubkey:provider.publicKey,lamports:0}));
    provider.rejectSign=true;await assert.rejects(adapter.signTransaction(tx));assert.equal(adapter.connected,true);provider.rejectSign=false;assert.equal(await adapter.signTransaction(tx),tx);assert.equal(provider.calls.sign,2);
    const next=Keypair.generate().publicKey;provider.publicKey=next;provider.emit('accountChanged',next);assert.ok(adapter.publicKey.equals(next));

@@ -1,11 +1,11 @@
 import {z} from 'zod';
 import {PublicKey} from '@solana/web3.js';
 import bs58 from 'bs58';
+import {offspringName,offspringTicker,offspringLore} from '../memesplice/identity';
 export const address=z.string().refine(value=>{try{return new PublicKey(value).toBase58()===value;}catch{return false;}},'Invalid Solana address');
 export const walletAddress=address.refine(value=>{try{const key=new PublicKey(value);return !key.equals(PublicKey.default)&&PublicKey.isOnCurve(key.toBytes());}catch{return false;}},'A signing wallet is required');
 export const signature=z.string().refine(value=>{try{return bs58.decode(value).length===64;}catch{return false;}});
-const bounded=(max:number)=>z.string().trim().min(1).max(max).refine(s=>new TextEncoder().encode(s).length<=max,'Value exceeds on-chain byte limit');
-export const identitySchema=z.object({name:bounded(32),symbol:bounded(13).refine(s=>/^[A-Za-z0-9]+$/.test(s)),description:z.string().trim().min(1).max(600)}).strict();
+export const identitySchema=z.object({name:offspringName,symbol:offspringTicker,description:offspringLore}).strict();
 export const metadataUri=z.string().min(1).max(200).regex(/^ipfs:\/\/[a-zA-Z0-9]+$/);
 export type LaunchIdentity=z.infer<typeof identitySchema>;
 export function tokenMetadata(identity:LaunchIdentity,image:string,website='',twitter=''){

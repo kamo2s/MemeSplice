@@ -16,8 +16,8 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "typecheck": "tsc --noEmit",
-    "test:queue": "node --test tests/queue.test.mjs tests/dispatcher.test.mjs tests/launch-limits.test.mjs",
-    "test": "npm run test:tokens && npm run test:queue && npm run test:ai && npm run test:showcase && npm run test:lab && npm run test:pump",
+    "test:queue": "node --test tests/queue.test.mjs tests/dispatcher.test.mjs tests/launch-limits.test.mjs tests/admin-generation.test.mjs tests/session-origin.test.cjs",
+    "test": "npm run test:tokens && npm run test:queue && npm run test:ai && npm run test:showcase && npm run test:lab && npm run test:pump && npm run test:dependencies",
     "configure:generation": "node scripts/configure-generation.mjs",
     "worker": "node scripts/generation-dispatcher.mjs",
     "worker:launches": "node scripts/launch-reconciler.mjs",
@@ -28,7 +28,8 @@
     "ai:smoke": "node scripts/ai-smoke.mjs",
     "ai:costs": "node scripts/ai-cost-report.mjs",
     "ai:storage": "node scripts/setup-ai-storage.mjs",
-    "ai:plan": "node scripts/ai-plan.mjs"
+    "ai:plan": "node scripts/ai-plan.mjs",
+    "test:dependencies": "node --test tests/dependency-compatibility.test.cjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -94,6 +95,15 @@
     "ws@^8.0.0": "8.22.0",
     "miniflare": {
       "sharp": "0.35.4"
+    },
+    "@coral-xyz/anchor": {
+      "toml": "4.2.0"
+    },
+    "jayson": {
+      "uuid": "11.1.1"
+    },
+    "@solflare-wallet/sdk": {
+      "uuid": "11.1.1"
     }
   }
 }

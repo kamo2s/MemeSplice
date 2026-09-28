@@ -1,6 +1,5 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {setup as migrated} from './database-fixture.mjs';
 async function setup(){const db=await migrated();await db.exec('update generation_settings set enabled=true; select splice_worker_heartbeat();');return db;}

@@ -15,7 +15,7 @@ const usage={input_tokens:100,output_tokens:200,input_tokens_details:{text_token
 const response=value=>({value,usage,requestId:'req-fixture',responseId:'resp-fixture'});
 function fixture(options={}){
  const calls=[],rows=[],profiles=new Map(),reservations=new Set();let started=false,uploaded=0,images=0,texts=0;const stages=[];
- const store={async begin(config){if(started)return false;started=true;rows.push({config});return true;},async reserve(stage){if(reservations.has(stage))return false;reservations.add(stage);return true;},async recordCall(...args){calls.push(args);},async recordRun(patch){rows.push(patch);},async profile(mint,key){return options.cached?profile:profiles.get(mint+key)||null;},async saveProfile(mint,key,valueVersion,value){profiles.set(mint+key,value);},async lockProfile(){return 'lease';},async unlockProfile(){},async previous(){return options.previous||null;},async upload(){uploaded++;if(options.storageFailure)throw Error('offline');return 'https://storage.example/custom/test/offspring.webp';},async pause(...args){rows.push({pause:args});}};
+ const store={async begin(config){if(started)return false;started=true;rows.push({config});return true;},async reserve(stage){if(reservations.has(stage))return false;reservations.add(stage);return true;},async recordCall(...args){calls.push(args);},async recordRun(patch){if(options.conceptStorageFailure&&patch.concept)throw Error('private database detail');rows.push(patch);},async profile(mint,key){return options.cached?profile:profiles.get(mint+key)||null;},async saveProfile(mint,key,valueVersion,value){profiles.set(mint+key,value);},async lockProfile(){return 'lease';},async unlockProfile(){},async previous(){return options.previous||null;},async upload(){uploaded++;if(options.storageFailure)throw Error('offline');return 'https://storage.example/custom/test/offspring.webp';},async pause(...args){rows.push({pause:args});}};
  const text={async generate(prompt){texts++;if(options.rateLimit)throw new AIError('PROVIDER_RATE_LIMIT','req-limit',37);if(options.textFailure)throw new AIError('PROVIDER_AUTH','req-error');if(prompt.version==='parent-analysis-v1')return response(profile);return response(options.badConcept||concept);}};
  const image={async generate(prompt,refs){images++;assert.ok(prompt.includes('ONE original'));assert.ok(refs.length<=2);if(options.imageFailure)throw new AIError('PROVIDER_UNCERTAIN','req-image');return response(Buffer.from('fake-image'));}};
  const cfg=aiConfig({}),ref={bytes:Buffer.from('ref'),mime:'image/webp',width:32,height:32,fingerprint:'abc'};
@@ -97,4 +97,29 @@ test('429 pauses the shared provider for Retry-After and makes no image call or 
  for(const retry of ['37','90000',new Date(Date.now()+120000).toUTCString()]){
   let calls=0;await assert.rejects(openAIRequest('fixture','responses','{}',1000,async()=>{calls++;return new Response(null,{status:429,headers:{'retry-after':retry}});}),error=>error.category==='PROVIDER_RATE_LIMIT'&&(retry==='90000'?error.retryAfter===90000:error.retryAfter>=37));assert.equal(calls,1);
  }
+});
+
+
+test('AI identities fit shared draft and launch limits, including UTF-8 names',()=>{
+ const {offspringName,offspringTicker,offspringLore}=load('memesplice/identity.js');
+ const {conceptJsonSchema}=load('ai/schemas.js');
+ for(const name of ['a'.repeat(32),'🐶'.repeat(8)])assert.equal(offspringName.safeParse(name).success,true);
+ for(const name of ['a'.repeat(33),'🐶'.repeat(9)]){assert.equal(offspringName.safeParse(name).success,false);assert.equal(conceptSchema.safeParse({...concept,name}).success,false);}
+ assert.equal(offspringTicker.safeParse('A'.repeat(13)).success,true);assert.equal(offspringTicker.safeParse('A'.repeat(14)).success,false);
+ assert.equal(offspringLore.safeParse('x'.repeat(600)).success,true);assert.equal(offspringLore.safeParse('x'.repeat(601)).success,false);
+ assert.equal(new RegExp(conceptJsonSchema.properties.lore.pattern).test('x'.repeat(601)),false);
+ assert.equal(new RegExp(conceptJsonSchema.properties.ticker.pattern).test('BAD$'),false);
+ assert.equal(conceptJsonSchema.properties.traits.maxItems,5);
+});
+
+test('failure diagnostics separate malformed JSON, invalid schema and concept persistence without logging raw data or retrying',async()=>{
+ const saved=console.warn,logs=[];console.warn=(...args)=>logs.push(args);
+ try{
+  for(const [options,category,stage] of [
+   [{badConcept:'not-json private-value'},'CONCEPT_INVALID_JSON','VALIDATING_CONCEPT'],
+   [{badConcept:{...concept,name:'private-value'.repeat(10)}},'CONCEPT_INVALID_SCHEMA','VALIDATING_CONCEPT'],
+   [{conceptStorageFailure:true},'BACKEND_OPERATION_FAILED','SAVING_CONCEPT'],
+  ]){const f=fixture(options);await assert.rejects(f.run(),{category});assert.equal(f.stats().images,0);assert.equal(f.rows.at(-1).failure_stage,stage);assert.equal(f.rows.at(-1).error_category,category);assert.equal(f.stats().texts,3);}
+  assert.ok(logs.length);assert.ok(!JSON.stringify(logs).includes('private-value'));assert.ok(!JSON.stringify(logs).includes('private database detail'));
+ }finally{console.warn=saved;}
 });
