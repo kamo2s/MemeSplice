@@ -17,3 +17,12 @@ export function chooseInstant(pair:InstantPair,previousId?:string,random=Math.ra
   const available=pair.pool.filter(child=>child.id!==previousId);const pool=available.length?available:pair.pool;
   return structuredClone(pool[Math.min(pool.length-1,Math.floor(random()*pool.length))]);
 }
+// Match mint addresses, not display names or provider-specific IDs. Parent order is irrelevant.
+export function findInstantPair(parents:readonly (Coin|null)[]):InstantPair|undefined{
+  const [a,b]=parents.map(parent=>parent?.contractAddress);
+  if(!a||!b)return undefined;
+  return instantPairs.find(pair=>{
+    const [x,y]=pair.parents.map(parent=>parent.contractAddress);
+    return (a===x&&b===y)||(a===y&&b===x);
+  });
+}

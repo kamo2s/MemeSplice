@@ -50,3 +50,37 @@ test('header search assigns the chosen slot without scrolling or generating',()=
   assert.equal(elements(app.tree,n=>n.type==='CoinPicker')[0].props.parents[0].id,'candidate');assert.deepEqual(app.events,[]);
  }finally{app.close();}
 });
+
+test('all Generate buttons reveal a prepared pair without calling the custom queue',async()=>{
+ for(let index=0;index<3;index++){
+  const app=mount();try{
+   const buttons=elements(app.tree,n=>n.type==='button'&&JSON.stringify(n.props.children).includes('Generate Offspring'));
+   assert.equal(buttons.length,3);await buttons[index].props.onClick();await buttons[index].props.onClick();
+   assert.equal(app.events.some(e=>e[0]==='generate'),false);assert.equal(app.timers.size,1);
+   const tick=app.timers.get(1);for(let i=0;i<4;i++)tick();app.render();
+   const child=elements(app.tree,n=>n.type==='OffspringCard')[0].props.offspring;
+   assert.equal(child.name,'Bonkwif');assert.equal(child.source,'instant');
+  }finally{app.close();}
+ }
+});
+
+test('reversed parent order and different search IDs still use the prepared mint pair',async()=>{
+ const app=mount();try{
+  const parents=elements(app.tree,n=>n.type==='CoinPicker')[0].props.parents;
+  elements(app.tree,n=>n.type==='SpliceShowcase')[0].props.onTry([{...parents[1],id:'search-wif'},{...parents[0],id:'search-bonk'}]);app.render();
+  await elements(app.tree,n=>n.props?.className==='btn btn-primary workspace-generate')[0].props.onClick();
+  assert.equal(app.events.some(e=>e[0]==='generate'),false);assert.equal(app.timers.size,1);
+  const tick=app.timers.get(1);for(let i=0;i<4;i++)tick();app.render();
+  assert.equal(elements(app.tree,n=>n.type==='OffspringCard')[0].props.offspring.name,'Bonkwif');
+ }finally{app.close();}
+});
+
+test('a different mint with the same name and ticker still requests custom generation',async()=>{
+ const app=mount();try{
+  const parents=elements(app.tree,n=>n.type==='CoinPicker')[0].props.parents;
+  const next=[parents[0],{...parents[1],contractAddress:'different-mint'}];
+  elements(app.tree,n=>n.type==='SpliceShowcase')[0].props.onTry(next);app.render();
+  await elements(app.tree,n=>n.props?.className==='btn btn-primary workspace-generate')[0].props.onClick();
+  assert.equal(app.timers.size,0);const calls=app.events.filter(e=>e[0]==='generate');assert.equal(calls.length,1);assert.deepEqual(calls[0][1],next);
+ }finally{app.close();}
+});
