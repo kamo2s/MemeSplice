@@ -1,24 +1,5 @@
 [
   {
-    "id": "gaskitty",
-    "prepared": true,
-    "parentTickers": [
-      "POPCAT",
-      "FARTCOIN"
-    ],
-    "offspring": {
-      "name": "GasKitty",
-      "ticker": "GASKITTY",
-      "tagline": "Where surprise meets cheeky breeze!",
-      "image": "/images/showcase/gaskitty.webp"
-    },
-    "provenance": {
-      "generationJobId": "5de86656-e3c5-4c4e-97af-b06c3ee4d3d5",
-      "conceptPromptVersion": "offspring-concept-v1",
-      "imagePromptVersion": "offspring-image-v1"
-    }
-  },
-  {
     "id": "boncata",
     "prepared": true,
     "parentTickers": [
@@ -33,6 +14,43 @@
     },
     "provenance": {
       "generationJobId": "b078cede-eb7f-4c75-bd34-0af4c05f4a99",
+      "conceptPromptVersion": "offspring-concept-v1",
+      "imagePromptVersion": "offspring-image-v1"
+    }
+  },
+  {
+    "id": "gulp",
+    "prepared": true,
+    "parentTickers": [
+      "POPCAT",
+      "MOODENG"
+    ],
+    "offspring": {
+      "name": "Gulp",
+      "ticker": "GULP",
+      "tagline": "The tiniest hippo. The biggest reaction.",
+      "image": "/images/instant/gulp.webp"
+    },
+    "provenance": {
+      "source": "editorial-imagegen",
+      "promptFile": "/images/instant/prompts.json"
+    }
+  },
+  {
+    "id": "gaskitty",
+    "prepared": true,
+    "parentTickers": [
+      "POPCAT",
+      "FARTCOIN"
+    ],
+    "offspring": {
+      "name": "GasKitty",
+      "ticker": "GASKITTY",
+      "tagline": "Where surprise meets cheeky breeze!",
+      "image": "/images/showcase/gaskitty.webp"
+    },
+    "provenance": {
+      "generationJobId": "5de86656-e3c5-4c4e-97af-b06c3ee4d3d5",
       "conceptPromptVersion": "offspring-concept-v1",
       "imagePromptVersion": "offspring-image-v1"
     }
@@ -68,24 +86,6 @@
       "ticker": "PURL",
       "tagline": "A knowing look. A perfectly knitted disguise.",
       "image": "/images/instant/purl.webp"
-    },
-    "provenance": {
-      "source": "editorial-imagegen",
-      "promptFile": "/images/instant/prompts.json"
-    }
-  },
-  {
-    "id": "gulp",
-    "prepared": true,
-    "parentTickers": [
-      "POPCAT",
-      "MOODENG"
-    ],
-    "offspring": {
-      "name": "Gulp",
-      "ticker": "GULP",
-      "tagline": "The tiniest hippo. The biggest reaction.",
-      "image": "/images/instant/gulp.webp"
     },
     "provenance": {
       "source": "editorial-imagegen",
