@@ -1,5 +1,6 @@
 import {existsSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
+import {validateWorkerEndpoint} from './worker-endpoint.mjs';
 
 export function createLaunchReconciler({url,key,fetcher=fetch,log=console.log,report=console.error}){
  let cursor=null,stopping=false,timer,active;
@@ -22,9 +23,8 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
  if(existsSync('.env.local'))process.loadEnvFile('.env.local');
  const key=process.env.GENERATION_WORKER_SECRET;
  const url=process.env.LAUNCH_RECONCILER_URL||'http://localhost:5173/api/launch/reconcile';
- const parsed=new URL(url);
  if(!key||key.length<32)throw Error('Set a 32+ character GENERATION_WORKER_SECRET.');
- if(parsed.protocol!=='https:'&&!(parsed.protocol==='http:'&&['localhost','127.0.0.1'].includes(parsed.hostname)))throw Error('Reconciler URL must use HTTPS or loopback.');
+ validateWorkerEndpoint(url);
  const worker=createLaunchReconciler({url,key});
  for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{void worker.stop();});
  await worker.start();

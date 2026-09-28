@@ -1,6 +1,7 @@
 import {existsSync} from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {dispatchPolicy,WORKER_REQUEST_TIMEOUT_MS} from './generation-dispatch-policy.mjs';
+import {validateWorkerEndpoint} from './worker-endpoint.mjs';
 
 // Exported lifecycle allows scheduler tests without paid calls.
 export function createDispatcher({url,key,fetcher=fetch,log=console.log,report=console.error}){
@@ -8,7 +9,7 @@ export function createDispatcher({url,key,fetcher=fetch,log=console.log,report=c
   const active=new Set(),headers={Authorization:'Bearer '+key};
   async function refresh(){
     try{
-      const response=await fetcher(url,{headers,signal:AbortSignal.timeout(10000),cache:'no-store'});
+      const response=await fetcher(url,{headers,signal:AbortSignal.timeout(10000),cache:'no-store',redirect:'error'});
       if(!response.ok)throw Error('Worker health unavailable');
       const body=await response.json();
       if(body.available!==true||typeof body.enabled!=='boolean'||typeof body.paused!=='boolean')throw Error('Worker not ready');
@@ -19,7 +20,7 @@ export function createDispatcher({url,key,fetcher=fetch,log=console.log,report=c
   }
   async function run(){
     try{
-      const response=await fetcher(url,{method:'POST',headers,signal:AbortSignal.timeout(WORKER_REQUEST_TIMEOUT_MS)});
+      const response=await fetcher(url,{method:'POST',headers,signal:AbortSignal.timeout(WORKER_REQUEST_TIMEOUT_MS),redirect:'error'});
       if(!response.ok){report('Worker request unavailable:',response.status);return;}
       const body=await response.json();
       if(body.reason==='AI_NOT_CONNECTED'){policy=null;enabled=false;}
@@ -49,8 +50,7 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   if(existsSync('.env.local'))process.loadEnvFile('.env.local');
   const key=process.env.GENERATION_WORKER_SECRET,url=process.env.GENERATION_WORKER_URL||'http://localhost:5173/api/generation/worker';
   if(!key||key.length<32)throw new Error('Set a 32+ character GENERATION_WORKER_SECRET.');
-  const parsed=new URL(url);
-  if(parsed.protocol!=='https:'&&!(parsed.protocol==='http:'&&['localhost','127.0.0.1'].includes(parsed.hostname)))throw new Error('Worker URL must use HTTPS or loopback.');
+  validateWorkerEndpoint(url);
   const dispatcher=createDispatcher({url,key});
   for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>{void dispatcher.stop();});
   await dispatcher.start();
