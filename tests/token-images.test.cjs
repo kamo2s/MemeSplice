@@ -14,6 +14,29 @@ const mint=popularTokens[0].mintAddress;
 const base={mintAddress:mint,name:'Example',ticker:'EX',imageUrl:null,decimals:6,priceUsd:null,marketCapUsd:null};
 const source=(source,url)=>({source,url});
 
+test('stored artwork survives signing-key changes without changing source images or stored records',()=>{
+  const previous=process.env.TOKEN_IMAGE_SIGNING_SECRET;
+  try{
+    process.env.TOKEN_IMAGE_SIGNING_SECRET='old-test-key';
+    const src='https://example.com/parent.png',old=delivery.imageProxyUrl(src);
+    const image={atlas:'parents',index:0,url:old,urls:[old,'/images/tokens/local.webp']};
+    process.env.TOKEN_IMAGE_SIGNING_SECRET='new-test-key';
+    assert.equal(delivery.authorizedImage(src,new URL(old,'https://example.com').searchParams.get('sig')),false);
+    const refreshed=delivery.refreshStoredArtwork(image),params=new URL(refreshed.url,'https://example.com').searchParams;
+    assert.equal(params.get('src'),src);assert.equal(delivery.authorizedImage(src,params.get('sig')),true);
+    assert.equal(refreshed.urls[0],refreshed.url);assert.equal(refreshed.urls[1],'/images/tokens/local.webp');
+    assert.equal(image.url,old);assert.equal(image.urls[0],old);
+    assert.deepEqual(delivery.refreshStoredArtwork(refreshed),refreshed);
+    const direct={atlas:'offspring',index:0,url:'https://example.com/offspring.webp'};
+    assert.deepEqual(delivery.refreshStoredArtwork(direct),direct);
+    const child={image:direct,parents:[{image},{image:direct}]};
+    const result=delivery.refreshStoredOffspring(child);
+    assert.equal(result.parents[0].image.url,refreshed.url);assert.equal(child.parents[0].image.url,old);
+    const unsafe={...image,url:'/api/tokens/image?src=http%3A%2F%2F127.0.0.1%2Fsecret&sig=old',urls:[]};
+    assert.equal(delivery.refreshStoredArtwork(unsafe).url,null);
+  }finally{if(previous===undefined)delete process.env.TOKEN_IMAGE_SIGNING_SECRET;else process.env.TOKEN_IMAGE_SIGNING_SECRET=previous;}
+});
+
 test('IPFS path, IPFS subdomain and Arweave normalize; unsafe protocols and literal/internal hosts fail',()=>{
   assert.equal(safeImageUrl('ipfs://ipfs/bafytest/image.png'),'https://ipfs.io/ipfs/bafytest/image.png');
   assert.equal(safeImageUrl('ar://transaction/image.png'),'https://arweave.net/transaction/image.png');

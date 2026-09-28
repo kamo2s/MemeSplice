@@ -1,4 +1,5 @@
 import 'server-only';
+import {refreshStoredOffspring} from '../tokens/server/token-images';
 import {randomUUID} from 'node:crypto';
 import {PublicKey} from '@solana/web3.js';
 import {database,rpc} from '../server/supabase';
@@ -35,7 +36,7 @@ export async function reviewLaunch(session:string,id:string,reconcileExisting=tr
  const assets=await database<Assets[]>(`offspring_launch_assets?offspring_id=eq.${id}&select=identity`);
  let availability={mayhem:false,holderReward:false,reason:'Live Pump settings could not be checked.'};
  try{const connection=launchConnection();await verifyCluster(connection,config.network);const global=await checkPumpProgram(connection);availability={mayhem:global.mayhemModeEnabled,holderReward:global.isHolderRewardEnabled,reason:'This option is disabled in Pump’s current network configuration.'};}catch{/* Fail closed for optional modes. */}
- return {launch:publicLaunch(row),identity:assets[0]?.identity??null,enabled:config.enabled,storageReady:config.pinata,network:config.network,offspringId:child.id,offspring:{...child.result,id:child.id,generationJobId:child.generation_job_id},availability};
+ return {launch:publicLaunch(row),identity:assets[0]?.identity??null,enabled:config.enabled,storageReady:config.pinata,network:config.network,offspringId:child.id,offspring:{...refreshStoredOffspring(child.result),id:child.id,generationJobId:child.generation_job_id},availability};
 }
 export type PrepareInput={offspringId:string;wallet:string;mint:string;identity:LaunchIdentity;settings?:LaunchSettings};
 // Price and blockhash are finalized BEFORE the message is persisted or exposed.

@@ -2,6 +2,7 @@ import "server-only";
 import {database,rpc,BackendError} from "../server/supabase";
 import {verifyToken} from "../tokens/server";
 import {tokenToCoin} from "../tokens/client";
+import {refreshStoredOffspring} from "../tokens/server/token-images";
 import {realGenerationProvider as generationProvider} from "../ai/generation-provider";
 import type {ClaimedJob,JobView} from "./types";
 import {instantPairs} from "./instant-splices";
@@ -16,7 +17,10 @@ export async function enqueueGeneration(sessionId:string,ip:string,requestId:str
   if(result.error)throw new BackendError(result.error,result.error==="USER_LIMIT"?"You've reached your mutation limit for now. Try again later.":['PROVIDER_PAUSED','WORKER_UNAVAILABLE'].includes(result.error)?"The mutation lab is temporarily cooling down. Your options are still safe.":"The mutation lab is at capacity. Try an Instant Splice or check back later.",429);
   return result;
 }
-export const getJob=(id:string,sessionId:string)=>rpc<JobView|null>("splice_job_status",{p_id:id,p_session:sessionId});
+export async function getJob(id:string,sessionId:string){
+  const job=await rpc<JobView|null>("splice_job_status",{p_id:id,p_session:sessionId});
+  return job?.result?{...job,result:refreshStoredOffspring(job.result)}:job;
+}
 export const queueBackend:QueueBackend={
   claim:()=>rpc<ClaimedJob|null>("splice_claim"),
   update:async(job,status,result,error)=>{

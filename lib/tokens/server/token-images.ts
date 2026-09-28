@@ -1,5 +1,6 @@
 import { createHmac, randomBytes, timingSafeEqual } from "node:crypto";
 import type { MemeSpliceToken } from "../types";
+import type { Artwork, Offspring } from "../../memesplice/types";
 import { imageGatewayVariants, imagesForToken, metadataImages, orderedImages } from "../image-sources";
 import { safeImageUrl } from "../validation";
 import { AsyncCache } from "./cache";
@@ -12,6 +13,23 @@ function signature(url: string) {
   return createHmac("sha256",key).update("splice-token-image-v1\n" + url).digest("hex");
 }
 export function imageProxyUrl(url: string) { return `/api/tokens/image?src=${encodeURIComponent(url)}&sig=${signature(url)}`; }
+// Use only with trusted records read from storage, never arbitrary request input.
+// Persisted delivery signatures belong to the environment that created them.
+export function refreshStoredArtwork(image: Artwork): Artwork {
+  function refresh(url: string) {
+    if (!url.startsWith('/api/tokens/image?')) return url;
+    const src = new URL(url,'https://memesplice.invalid').searchParams.get('src');
+    return src && safeImageUrl(src) === src ? imageProxyUrl(src) : '';
+  }
+  return {...image,url:image.url ? refresh(image.url) || null : image.url,
+    ...(image.urls ? {urls:image.urls.map(refresh).filter(Boolean)} : {})};
+}
+export function refreshStoredOffspring(child: Offspring): Offspring {
+  return {...child,image:refreshStoredArtwork(child.image),parents:child.parents.map(parent => ({
+    ...parent,image:refreshStoredArtwork(parent.image),
+    ...(parent.token ? {token:withImageDelivery(parent.token)} : {})
+  })) as Offspring['parents']};
+}
 export function authorizedImage(src: string, sig: string) {
   if (safeImageUrl(src) !== src || !/^[a-f0-9]{64}$/.test(sig)) return false;
   return timingSafeEqual(Buffer.from(signature(src),"hex"),Buffer.from(sig,"hex"));
