@@ -1,17 +1,31 @@
-.root{position:relative;min-height:286px;isolation:isolate}
-.instrument{position:relative;width:100%;aspect-ratio:180/292}
-.shell{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.helix{position:absolute;left:25%;top:18%;width:50%;height:59%;pointer-events:none;mix-blend-mode:screen}
-.aura{position:absolute;inset:8% -20% 0;background:radial-gradient(ellipse at 50% 65%,#a13bef18,transparent 65%);pointer-events:none}
-.ring{filter:drop-shadow(0 0 3px #bd71ff);transition:filter .6s}
-.status{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;font:7px monospace;letter-spacing:.6px;color:#a98abf;white-space:nowrap}
-.status>span{width:4px;height:4px;border-radius:50%;background:#b388d5;box-shadow:0 0 6px #a665df66}
-.feed{position:absolute;top:49%;width:37%;height:1px;opacity:0;z-index:2;background:linear-gradient(90deg,transparent,#c889ff);transition:opacity .5s}
-.feedLeft{left:-25%}.feedRight{right:-25%;transform:rotate(180deg)}
-.feed:after{content:'';position:absolute;top:-1px;left:0;width:3px;height:3px;border-radius:50%;background:#e7c6ff;box-shadow:0 0 8px 2px #b163e8;animation:signal 1.7s ease-in-out infinite;animation-play-state:paused}
-.active .feed{opacity:.8}.active .feed:after{animation-play-state:running}.active .feedRight:after{animation-delay:.6s}
-.active .ring{filter:drop-shadow(0 0 5px #d7a6ff)}
-.active .aura{background:radial-gradient(ellipse at 50% 60%,#a13bef2e,transparent 70%)}
-.active .status>span{background:#e4c6ff;box-shadow:0 0 7px #c08af5}
-@keyframes signal{0%{transform:translateX(0);opacity:0}25%{opacity:1}100%{transform:translateX(45px);opacity:0}}
-@media(prefers-reduced-motion:reduce){.feed:after{animation:none}.feed,.ring{transition:none}}
+.root{position:relative;width:100%;min-width:0;margin:auto;isolation:isolate;--float-time:7s;--orbit-time:12s;--pulse-time:5s;--energy-opacity:.38}
+.stage{position:relative;width:100%;aspect-ratio:2/3;pointer-events:none}
+.artwork{position:absolute;inset:-6% -9%;mix-blend-mode:screen;animation:float var(--float-time) ease-in-out infinite;transform-origin:50% 55%}
+.artwork img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;mask-image:radial-gradient(ellipse at center,#000 48%,transparent 73%)}
+.aura{position:absolute;inset:4% -45%;border-radius:50%;background:radial-gradient(ellipse,#9529e22e 0%,#4b38d61a 32%,transparent 66%);animation:breathe var(--pulse-time) ease-in-out infinite}
+.halo{position:absolute;inset:12% -23%;border:1px solid #a668f214;border-radius:50%;transform:rotate(-16deg);box-shadow:0 0 45px #7139c009,inset 0 0 25px #7534bb07}
+.halo:after{content:'';position:absolute;inset:7%;border:1px dashed #9f71db16;border-radius:50%}
+.energy{position:absolute;left:-57%;top:0;width:214%;height:100%;overflow:visible;opacity:var(--energy-opacity);transition:opacity .7s}
+.wave,.waveSecondary{stroke-width:1.1;stroke-linecap:round;stroke-dasharray:75 310;animation:signal 7s linear infinite}
+.waveGlow{stroke-width:6;filter:blur(5px);opacity:.65}
+.waveSecondary{stroke-width:.7;stroke-dasharray:40 320;animation-duration:9s;animation-direction:reverse;opacity:.5}
+.orbit{position:absolute;left:8%;width:84%;height:20%;border:1px solid #b674f024;border-radius:50%;transform:rotate(-24deg);animation:orbitTilt 10s ease-in-out infinite alternate}
+.orbitOne{top:27%}.orbitTwo{top:51%;transform:rotate(25deg);animation-delay:-5s;animation-direction:alternate-reverse;border-color:#729dff26}.orbitThree{top:73%;left:17%;width:66%;height:14%;animation-delay:-3s;opacity:.65}
+.orbit i{position:absolute;width:5px;height:5px;border-radius:50%;offset-path:ellipse(50% 50% at 50% 50%);animation:orbitTravel var(--orbit-time) linear infinite;background:#eed3ff;box-shadow:0 0 5px #f3aaff,0 0 12px 2px #ba32f7}
+.orbitTwo i{animation-delay:-5s;animation-direction:reverse;background:#c4f4ff;box-shadow:0 0 6px #83cdff,0 0 12px 2px #563ef7}.orbitThree i{width:3px;height:3px;animation-delay:-8s}
+.sparks{position:absolute;inset:0}.sparks i{position:absolute;width:2px;height:2px;background:#e8beff;border-radius:50%;box-shadow:0 0 6px 1px #b656ff;animation:sparkle 4s ease-in-out infinite}
+.sparks i:nth-child(1){left:14%;top:23%;animation-delay:-1s}.sparks i:nth-child(2){right:15%;top:38%;animation-delay:-2.4s}.sparks i:nth-child(3){left:4%;top:59%;animation-delay:-3.2s}.sparks i:nth-child(4){right:8%;top:76%;animation-delay:-.6s}.sparks i:nth-child(5){left:37%;top:10%;animation-delay:-2s}.sparks i:nth-child(6){right:23%;top:89%;animation-delay:-3.6s}
+.status{display:flex;align-items:center;justify-content:center;gap:9px;color:#c494ee;font:8px/1.5 monospace;letter-spacing:1.5px;text-align:center;min-height:24px;position:relative}
+.status>span{width:16px;height:1px;flex-shrink:0;background:linear-gradient(90deg,transparent,#9860d5)}.status>span:last-child{transform:rotate(180deg)}
+.indicator{display:flex;gap:6px;justify-content:center;margin-top:4px}.indicator i{width:3px;height:3px;border-radius:50%;background:#9b62de;box-shadow:0 0 7px #a868ff77;animation:dotPulse 3s ease-in-out infinite}.indicator i:nth-child(2){background:#dc9bff;animation-delay:.25s}.indicator i:nth-child(3){background:#7970f8;animation-delay:.5s}
+.active{--float-time:3s;--orbit-time:3.5s;--pulse-time:2s;--energy-opacity:.9}
+.active .artwork{filter:brightness(1.12) saturate(1.08)}.active .wave{animation-duration:2s}.active .waveSecondary{animation-duration:2.8s}.active .aura{background:radial-gradient(ellipse,#aa3bef42 0%,#5449fa22 36%,transparent 68%)}.active .indicator i{animation-duration:1.1s}.active .status{color:#e2b8ff}
+.root[data-paused=true] *{animation-play-state:paused!important}
+@keyframes float{0%,100%{transform:translateY(3px) rotate(-1.2deg)}50%{transform:translateY(-6px) rotate(1.2deg)}}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes orbitTravel{to{offset-distance:100%}}
+@keyframes orbitTilt{to{transform:rotate(14deg) translateY(-3px)}}
+@keyframes signal{to{stroke-dashoffset:-385}}
+@keyframes sparkle{0%,100%{opacity:.15;transform:translateY(4px) scale(.7)}50%{opacity:.8;transform:translateY(-6px) scale(1.25)}}
+@keyframes dotPulse{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.root *{animation:none!important;transition:none!important}.artwork{transform:none}.indicator i{opacity:.7}}
