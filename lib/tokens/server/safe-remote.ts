@@ -37,7 +37,7 @@ export async function safeRemoteFile(input: string, kind: "image" | "json", opti
       const request = (url.protocol === "https:" ? httpsRequest : httpRequest)(url, {
         agent: false, signal, family: pinned.family,
         lookup: (_host,_options,callback) => callback(null,pinned.address,pinned.family),
-        headers: {Accept: kind === "json" ? "application/json" : "image/avif,image/webp,image/png,image/jpeg,image/gif", "Accept-Encoding":"identity", "User-Agent":"MemeSplice-TokenArtwork/1.0"},
+        headers: {Accept: kind === "json" ? "application/json" : "image/avif,image/webp,image/png,image/jpeg,image/gif", "Accept-Encoding":"identity", "User-Agent":"Splice-TokenArtwork/1.0"},
       }, response => {
         const status = response.statusCode ?? 0;
         if ([301,302,303,307,308].includes(status) && response.headers.location) {
