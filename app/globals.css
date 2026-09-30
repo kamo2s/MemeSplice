@@ -17,11 +17,11 @@
 
 /* The supplied S and live lettering form one word in both brand links.
    Screen compositing removes the asset's black matte without a visible box. */
-.header-wordmark,.footer-wordmark{flex-shrink:0;width:132px}
+.header-wordmark,.footer-wordmark{flex-shrink:0;width:142px}
 .splice-wordmark{display:inline-flex;align-items:center;gap:1px;height:48px;line-height:1;white-space:nowrap}
-.splice-wordmark-symbol{display:block;flex:none;width:28px;height:43px;background:url('/images/brand/splice-dna-s-2026.png') -18.4px -10.7px / 66.6px 66.6px no-repeat;mix-blend-mode:screen}
+.splice-wordmark-symbol{display:block;flex:none;width:38px;height:52px;background:url('/images/brand/splice-dna-s-pink.png') -11px -2px / 58px 58px no-repeat;mix-blend-mode:screen;mask-image:radial-gradient(ellipse at center,#000 65%,transparent 100%)}
 .splice-wordmark>.splice-wordmark-text{font-size:40px;font-weight:650;letter-spacing:-1.8px;color:#f4f1ff;transform:translateY(1px)}
-@media(max-width:480px){.header-wordmark{width:110px}.header-wordmark .splice-wordmark{height:42px;transform:scale(.86);transform-origin:left center}}
+@media(max-width:480px){.header-wordmark{width:122px}.header-wordmark .splice-wordmark{height:42px;transform:scale(.86);transform-origin:left center}}
 
 /* Readable resource pages within the existing modal design. */
 .resource-dialog{width:calc(100% - 2rem)!important;max-width:720px!important;max-height:85dvh;overflow-y:auto}.resource-sections{display:grid;gap:22px;text-align:left}.resource-sections h3{font-size:15px;font-weight:650;color:#ede5fa;margin:0 0 7px}.resource-sections p{font-size:14px;line-height:1.75;color:#a9acc3;margin:0}.resource-links{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13px}.resource-links a{color:#ce9bff;text-decoration:underline;text-underline-offset:3px}
